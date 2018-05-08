@@ -33,8 +33,8 @@ create = (startGain, startWaveform, startFreq) => {
     let distortionNode = audioCtx.createWaveShaper();
     let filterNode = audioCtx.createBiquadFilter();
     let envlopeNode = audioCtx.createGain();
-
     let output = audioCtx.destination;
+    console.log(attackTime.value)
     // Internal Functions
     setFilterFreq = (filterFreq) => {
         console.log(filterFreq);
@@ -72,8 +72,9 @@ create = (startGain, startWaveform, startFreq) => {
         oscNode.type = startWaveform;
         oscNode.frequency.value = frequencySelector.value;
         // Add ADSR
-        gainNode.gain.linearRampToValueAtTime(startGain + now + Number(attackGain.value), now + Number(attackTime.value));
-        gainNode.gain.linearRampToValueAtTime(startGain, now + Number(decayTime.value) + Number(attackTime.value));
+        gainNode.gain.setValueAtTime(0.0001, now);
+        gainNode.gain.linearRampToValueAtTime(Number(attackGain.value), Number(attackTime.value));
+        gainNode.gain.linearRampToValueAtTime(0.0001 + startGain, now + Number(decayTime.value) + Number(attackTime.value));
         // gainNode.gain.linearRampToValueAtTime(startGain, now + sustainTime.value);
         gainNode.gain.linearRampToValueAtTime(startGain, now + Number(sustainTime.value) + Number(decayTime.value) + Number(attackTime.value));
         gainNode.gain.linearRampToValueAtTime(0.0001, now + Number(releaseTime.value) + Number(sustainTime.value) + Number(decayTime.value) + Number(attackTime.value));
@@ -107,7 +108,7 @@ create = (startGain, startWaveform, startFreq) => {
         
     }
     // startup config & routing
-    // GainNode.gain = 0.001;
+    gainNode.gain = 0.001;
     oscNode.connect(envlopeNode);
     envlopeNode.connect(filterNode);
     filterNode.connect(distortionNode);

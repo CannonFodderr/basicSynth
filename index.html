@@ -26,15 +26,15 @@
         <!-- ADSR Envelopes -->
         <h5>ADSR Envlope</h5>
         <label for="attackTime">Attack Time</label>
-        <input type="range" name="attackTime" id="attackTime" value=0.1 min=0.1 max=1 step=0.1>
+        <input type="range" name="attackTime" id="attackTime" value=0.1 min=0.01 max=5 step=0.05>
         <label for="attackGain">Attack Gain</label>
-        <input type="range" name="attackGain" id="attackGain" value=0.1 min=0.1 max=1 step=0.01>
+        <input type="range" name="attackGain" id="attackGain" value=0.5 min=0.1 max=1 step=0.1>
         <br>
         <label for="decayTime">Decay Time</label>
-        <input type="range" name="decayTime" id="decayTime" value=0.1 min=0.1 max=1 step=0.1>
+        <input type="range" name="decayTime" id="decayTime" value=0.1 min=0.01 max=1 step=0.1>
         <br>
         <label for="Sustain Time">Sustain Time</label>
-        <input type="range" name="sustainTime" id="sustainTime" value=50 min=1 max=100 step=1>
+        <input type="range" name="sustainTime" id="sustainTime" value=1 min=0.01 max=5 step=1>
         <br>
         <label for="Release Time">Release Time</label>
         <input type="range" name="releaseTime" id="releaseTime" value=1 min=0.1 max=5 step=0.1>
