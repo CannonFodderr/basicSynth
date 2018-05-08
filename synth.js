@@ -19,7 +19,7 @@ let isRunning = false;
 startBtn.addEventListener('click', ()=>{
     if(isRunning == false){
         isRunning = true;
-        create(gainSlider.value, waveformSelector.value, frequencySelector.value);
+        create(Number(gainSlider.value), waveformSelector.value, Number(frequencySelector.value));
     }   
 });
 
@@ -71,14 +71,12 @@ create = (startGain, startWaveform, startFreq) => {
         oscNode.start();
         oscNode.type = startWaveform;
         oscNode.frequency.value = frequencySelector.value;
-
-        console.log(attackGain.value + startGain);
         // Add ADSR
-        gainNode.gain.linearRampToValueAtTime(startGain, now + attackTime.value);
-        gainNode.gain.linearRampToValueAtTime(startGain, now + decayTime.value);
+        gainNode.gain.linearRampToValueAtTime(startGain + now + Number(attackGain.value), now + Number(attackTime.value));
+        gainNode.gain.linearRampToValueAtTime(startGain, now + Number(decayTime.value) + Number(attackTime.value));
         // gainNode.gain.linearRampToValueAtTime(startGain, now + sustainTime.value);
-        gainNode.gain.setValueAtTime(startGain, now + sustainTime.value);
-        gainNode.gain.linearRampToValueAtTime(0.0001, now + releaseTime.value);
+        gainNode.gain.linearRampToValueAtTime(startGain, now + Number(sustainTime.value) + Number(decayTime.value) + Number(attackTime.value));
+        gainNode.gain.linearRampToValueAtTime(0.0001, now + Number(releaseTime.value) + Number(sustainTime.value) + Number(decayTime.value) + Number(attackTime.value));
         // General Gain
         // gainNode.gain.setValueAtTime(0.0001, audioCtx.currentTime);
         // gainNode.gain.exponentialRampToValueAtTime(startGain, audioCtx.currentTime + 0.015);
