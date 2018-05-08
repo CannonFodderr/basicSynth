@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Synth</title>
+</head>
+<body>
+    <button id="start_btn">Start</button>
+    <button id="stop_btn">Stop</button>
+    <div class="controls">
+        <h5>OSC</h5>
+        <label for="gain">gain</label>
+        <input type="range" name="gain" id="gain" min="0.0001" max="0.1" value="0.03" step="0.001">
+        <label for="waveform">waveform</label>
+        <select name="waveform" id="waveform">
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Saw</option>
+        </select>
+        <label for="frequency">Frequency</label>
+        <input type="range" name="frequency" id="frequency" min=20  max=20000 value=1000 step="1">
+        <hr>
+        <!-- ADSR Envelopes -->
+        <h5>ADSR Envlope</h5>
+        <label for="attackTime">Attack Time</label>
+        <input type="range" name="attackTime" id="attackTime" value="0.1" min="0.1" max="1" step="0.1">
+        <label for="attackGain">Attack Gain</label>
+        <input type="range" name="attackGain" id="attackGain" value="0.001" min="0.001" max="0.1" step="0.01">
+        <br>
+        <label for="attackTime">Decay Time</label>
+        <input type="range" name="decayTime" id="decayTime" value="0.1" min="0.1" max="1" step="0.1">
+        <label for="attackGain">Decay Gain</label>
+        <input type="range" name="decayGain" id="decayGain" value="0.001" min="0.001" max="0.1" step="0.01">
+        <br>
+        <label for="attackTime">Sustain Time</label>
+        <input type="range" name="sustainTime" id="sustainTime" value="1000" min="1" max="5000" step="1">
+        <label for="attackGain">Sustain Gain</label>
+        <input type="range" name="sustainGain" id="sustainGain" value="0.001" min="0.001" max="0.1" step="0.01">
+        <br>
+        <label for="attackTime">Release Time</label>
+        <input type="range" name="releaseTime" id="releaseTime" value="1" min="0.1" max="5" step="0.1">
+        <label for="attackGain">Release Gain</label>
+        <input type="range" name="releaseGain" id="releaseGain" value="0.001" min="0.001" max="0.1" step="0.01">
+        <hr>
+        <h5>Filter</h5>
+        <label for="filterType">Type</label>
+        <select name="filterType" id="filterType">
+            <option value="highpass">Highpass</option>
+            <option value="bandpass">Bandpass</option>
+            <option value="lowpass">Lowpass</option>
+        </select>
+        <label for="filterFreq">Frequency</label>
+        <input type="range" id="filterFreq" name="filterFreq" min=20 max=20000 value="1000" step="1">
+    </div>
+
+    <script src="synth.js"></script>
+</body>
+</html>
