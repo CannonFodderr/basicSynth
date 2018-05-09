@@ -14,17 +14,8 @@ let releaseTime = document.querySelector('#releaseTime');
 let filterSelector = document.querySelector('#filterType');
 let filterFreqSelector = document.querySelector('#filterFreq');
 let isRunning = false;
+let voiceArr = [];
 
-// let data = {
-//     waveformSelector: document.querySelector('#waveform').value,
-//     attackTime: document.querySelector('#attackTime').value,
-//     attackGain: document.querySelector('#attackGain').value,
-//     decayTime: document.querySelector('#decayTime').value,
-//     sustainTime: document.querySelector('#sustainTime').value,
-//     releaseTime: document.querySelector('#releaseTime').value,
-//     filterSelector: document.querySelector('#filterType').value,
-//     filterFreqSelector: document.querySelector('#filterFreq').value
-// }
 
 // Generate Note
 noteGenerator = (pressedKey) => {
@@ -35,7 +26,7 @@ noteGenerator = (pressedKey) => {
         playNote(key);
     }
     playNote = (key) =>  {
-        key.oscNode.start();
+        key.oscNode.start(0);
         key.gainNode.gain.linearRampToValueAtTime(0.0001, key.attackTime);
         key.gainNode.gain.linearRampToValueAtTime(0.0001 + key.gainNode.gain.value, key.now + Number(key.decayTime) + Number(key.attackTime));
         key.gainNode.gain.linearRampToValueAtTime(key.gainNode.gain.value, key.now + Number(key.sustainTime) + Number(key.decayTime) + Number(key.attackTime));
@@ -43,6 +34,14 @@ noteGenerator = (pressedKey) => {
     }
     let audioContext = new AudioContext();
     let note = new Note(audioContext, pressedKey);
+    if(voiceArr.length > 15){
+        voiceArr[0].oscNode.stop(0);
+        voiceArr.shift();
+
+    }
+        
+    voiceArr.push(note);
+    console.log(voiceArr);
     noteRoute(note);    
 }
 
@@ -55,7 +54,7 @@ class Note {
         this.gainNode = context.createGain();
         this.filterNode = context.createBiquadFilter();
         // OSC
-        this.oscNode.waveformType = waveformSelector.value;
+        this.oscNode.type = waveformSelector.value;
         this.oscNode.frequency.value = pressedKey;
         this.gainNode.gain.value = Number(gainSlider.value)
         // ADSR
@@ -67,12 +66,49 @@ class Note {
         // Filter
         this.filterType = filterType.value;
         this.filterFreq = Number(filterFreq.value);
-        console.log(this);
-
     }
     
 }
 
-window.addEventListener('keypress', ()=>{
-    noteGenerator(500);
+window.addEventListener('keypress', (event)=>{
+    console.log(event.keyCode);
+    if(event.keyCode === 97){
+        noteGenerator(261.6);
+    }
+    if(event.keyCode === 119){
+        noteGenerator(277.2);
+    }
+    if(event.keyCode === 115){
+        noteGenerator(293.7);
+    }
+    if(event.keyCode === 116){
+        noteGenerator(370.0);
+    }
+    if(event.keyCode === 117){
+        noteGenerator(466.2);
+    }
+    if(event.keyCode === 121){
+        noteGenerator(415.3);
+    }
+    if(event.keyCode === 100){
+        noteGenerator(329.6);
+    }
+    if(event.keyCode === 101){
+        noteGenerator(311.1);
+    }
+    if(event.keyCode === 102){
+        noteGenerator(349.2);
+    }
+    if(event.keyCode === 103){
+        noteGenerator(392.0);
+    }
+    if(event.keyCode === 104){
+        noteGenerator(440.0);
+    }
+    if(event.keyCode === 106){
+        noteGenerator(493.9);
+    }
+    if(event.keyCode === 107){
+        noteGenerator(523.3);
+    }
 })
