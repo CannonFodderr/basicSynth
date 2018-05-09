@@ -15,7 +15,7 @@ let filterSelector = document.querySelector('#filterType');
 let filterFreqSelector = document.querySelector('#filterFreq');
 let isRunning = false;
 let voiceArr = [];
-
+let audioContext;
 
 // Generate Note
 noteGenerator = (pressedKey) => {
@@ -32,7 +32,7 @@ noteGenerator = (pressedKey) => {
         key.gainNode.gain.linearRampToValueAtTime(key.gainNode.gain.value, key.now + Number(key.sustainTime) + Number(key.decayTime) + Number(key.attackTime));
         key.gainNode.gain.linearRampToValueAtTime(0.0001, key.now + Number(key.releaseTime) + Number(key.sustainTime) + Number(key.decayTime) + Number(key.attackTime));
     }
-    let audioContext = new AudioContext();
+    
     let note = new Note(audioContext, pressedKey);
     if(voiceArr.length > 15){
         voiceArr[0].oscNode.stop(0);
@@ -53,6 +53,7 @@ class Note {
         this.oscNode = context.createOscillator();
         this.gainNode = context.createGain();
         this.filterNode = context.createBiquadFilter();
+        this.buffer = context.createBuffer(1, context.sampleRate * 3, context.sampleRate);
         // OSC
         this.oscNode.type = waveformSelector.value;
         this.oscNode.frequency.value = pressedKey;
@@ -66,10 +67,22 @@ class Note {
         // Filter
         this.filterType = filterType.value;
         this.filterFreq = Number(filterFreq.value);
+        console.log(this);
     }
     
 }
+// Create audio context
+init = () => {
+    try{
+        window.AudioContext = window.AudioContext||window.webkitAudioContext;
+        audioContext = new AudioContext();
+    }
+    catch(e){
+        alert('Audio Context API not available in this browser');
+    }
+}
 
+window.addEventListener('mouseover',init,false)
 window.addEventListener('keypress', (event)=>{
     console.log(event.keyCode);
     if(event.keyCode === 97){
