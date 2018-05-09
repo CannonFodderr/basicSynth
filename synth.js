@@ -34,7 +34,7 @@ create = (startGain, startWaveform, startFreq) => {
     let filterNode = audioCtx.createBiquadFilter();
     let envlopeNode = audioCtx.createGain();
     let output = audioCtx.destination;
-    console.log(attackTime.value)
+
     // Internal Functions
     setFilterFreq = (filterFreq) => {
         console.log(filterFreq);
@@ -75,12 +75,8 @@ create = (startGain, startWaveform, startFreq) => {
         gainNode.gain.setValueAtTime(0.0001, now);
         gainNode.gain.linearRampToValueAtTime(Number(attackGain.value), Number(attackTime.value));
         gainNode.gain.linearRampToValueAtTime(0.0001 + startGain, now + Number(decayTime.value) + Number(attackTime.value));
-        // gainNode.gain.linearRampToValueAtTime(startGain, now + sustainTime.value);
         gainNode.gain.linearRampToValueAtTime(startGain, now + Number(sustainTime.value) + Number(decayTime.value) + Number(attackTime.value));
         gainNode.gain.linearRampToValueAtTime(0.0001, now + Number(releaseTime.value) + Number(sustainTime.value) + Number(decayTime.value) + Number(attackTime.value));
-        // General Gain
-        // gainNode.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-        // gainNode.gain.exponentialRampToValueAtTime(startGain, audioCtx.currentTime + 0.015);
         filterNode.type = filterSelector.value;
         filterNode.frequency.value = filterFreqSelector.value;
         stopBtn.addEventListener('click', ()=>{
