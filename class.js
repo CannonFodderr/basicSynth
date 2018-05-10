@@ -1,5 +1,3 @@
-let startBtn = document.querySelector('#start_btn');
-let stopBtn = document.querySelector('#stop_btn');
 // OSC Elements
 let gainSlider = document.querySelector('#gainSlider');
 let waveformSelector = document.querySelector('#waveform');
@@ -38,7 +36,6 @@ noteGenerator = (pressedKey) => {
     if(voiceArr.length > 15){
         voiceArr[0].oscNode.stop(0);
         voiceArr.shift();
-
     }
         
     voiceArr.push(note);
@@ -82,7 +79,8 @@ init = () => {
     }
 }
 
-// window.addEventListener('load',init,false)
+// listen for keyress and assign keys to notes  
+// On first press change state to running &  create AudioContext + Buffer
 window.addEventListener('keypress', (event)=>{
     if(isRunning === false){
         init();
