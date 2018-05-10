@@ -22,7 +22,8 @@ noteGenerator = (pressedKey) => {
     // Functions
     noteRoute = (key) => {
         key.oscNode.connect(key.gainNode);
-        key.gainNode.connect(audioContext.destination);
+        key.gainNode.connect(key.filterNode);
+        key.filterNode.connect(audioContext.destination);
         playNote(key);
     }
     playNote = (key) =>  {
@@ -41,7 +42,6 @@ noteGenerator = (pressedKey) => {
     }
         
     voiceArr.push(note);
-    console.log(voiceArr);
     noteRoute(note);    
 }
 
@@ -65,25 +65,29 @@ class Note {
         this.sustainTime = Number(sustainTime.value);
         this.releaseTime = Number(releaseTime.value);
         // Filter
-        this.filterType = filterType.value;
-        this.filterFreq = Number(filterFreq.value);
-        console.log(this);
+        this.filterNode.type = filterType.value;
+        this.filterNode.frequency.value = Number(filterFreq.value);
     }
     
 }
-// Create audio context
+// Create audio context & Buffer
 init = () => {
     try{
         window.AudioContext = window.AudioContext||window.webkitAudioContext;
         audioContext = new AudioContext();
+        let buffer = audioContext.createBuffer(2, audioContext.sampleRate * 3, audioContext.sampleRate)
     }
     catch(e){
         alert('Audio Context API not available in this browser');
     }
 }
 
-window.addEventListener('mouseover',init,false)
+// window.addEventListener('load',init,false)
 window.addEventListener('keypress', (event)=>{
+    if(isRunning === false){
+        init();
+    }
+    isRunning = true;
     console.log(event.keyCode);
     if(event.keyCode === 97){
         noteGenerator(261.6);
