@@ -70,7 +70,7 @@ class Note {
     }
     
 }
-// Create audio context
+// Create audio context & Buffer
 init = () => {
     try{
         window.AudioContext = window.AudioContext||window.webkitAudioContext;
