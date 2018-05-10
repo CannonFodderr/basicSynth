@@ -15,10 +15,10 @@
         <input type="range" name="gainSlider" id="gainSlider" min=0.001 max=0.1 value=0.05 step=0.001>
         <label for="waveform">waveform</label>
         <select name="waveform" id="waveform">
+            <option value="sawtooth">Saw</option>
             <option value="sine">Sine</option>
             <option value="square">Square</option>
             <option value="triangle">Triangle</option>
-            <option value="sawtooth">Saw</option>
         </select>
         <label for="frequency">Frequency</label>
         <input type="range" name="frequency" id="frequency" min=20  max=20000 value=1000 step=1>
@@ -42,9 +42,9 @@
         <h5>Filter</h5>
         <label for="filterType">Type</label>
         <select name="filterType" id="filterType">
-            <option value="highpass">Highpass</option>
-            <option value="bandpass">Bandpass</option>
             <option value="lowpass">Lowpass</option>
+            <option value="bandpass">Bandpass</option>
+            <option value="highpass">Highpass</option>
         </select>
         <label for="filterFreq">Frequency</label>
         <input type="range" id="filterFreq" name="filterFreq" min=20 max=20000 value=1000 step=1>
