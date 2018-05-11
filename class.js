@@ -11,8 +11,13 @@ let releaseTime = document.querySelector('#releaseTime');
 // Filter Elements
 let filterSelector = document.querySelector('#filterType');
 let filterFreqSelector = document.querySelector('#filterFreq');
+// Tuning Elements
+let octaveUp = document.getElementById('octaveUp');
+let octaveDown = document.getElementById('octaveDown');
+
 let isRunning = false;
 let voiceArr = [];
+let octave = 4;
 let audioContext;
 
 // Generate Note
@@ -86,44 +91,56 @@ window.addEventListener('keypress', (event)=>{
         init();
     }
     isRunning = true;
-    console.log(event.keyCode);
     if(event.keyCode === 97){
-        noteGenerator(261.6);
+        noteGenerator(16.35 * octave);
     }
     if(event.keyCode === 119){
-        noteGenerator(277.2);
+        noteGenerator(17.32 * octave);
     }
     if(event.keyCode === 115){
-        noteGenerator(293.7);
+        noteGenerator(18.35 * octave);
     }
     if(event.keyCode === 116){
-        noteGenerator(370.0);
+        noteGenerator(23.12 * octave);
     }
     if(event.keyCode === 117){
-        noteGenerator(466.2);
+        noteGenerator(29.14 * octave);
     }
     if(event.keyCode === 121){
-        noteGenerator(415.3);
+        noteGenerator(25.96 * octave);
     }
     if(event.keyCode === 100){
-        noteGenerator(329.6);
+        noteGenerator(20.60 * octave);
     }
     if(event.keyCode === 101){
-        noteGenerator(311.1);
+        noteGenerator(19.45 * octave);
     }
     if(event.keyCode === 102){
-        noteGenerator(349.2);
+        noteGenerator(21.83 * octave);
     }
     if(event.keyCode === 103){
-        noteGenerator(392.0);
+        noteGenerator(24.50 * octave);
     }
     if(event.keyCode === 104){
-        noteGenerator(440.0);
+        noteGenerator(27.50 * octave);
     }
     if(event.keyCode === 106){
-        noteGenerator(493.9);
+        noteGenerator(30.87 * octave);
     }
     if(event.keyCode === 107){
-        noteGenerator(523.3);
+        noteGenerator(32.70 * octave);
+    }
+});
+
+// Set Octave
+
+octaveUp.addEventListener('click', ()=> {
+    if(octave < 9){
+        octave += 1;
+    }
+})
+octaveDown.addEventListener('click', ()=> {
+    if(octave > 1){
+        octave -= 1;
     }
 })
