@@ -135,7 +135,7 @@ window.addEventListener('keypress', (event)=>{
 // Set Octave
 
 octaveUp.addEventListener('click', ()=> {
-    if(octave < 9){
+    if(octave < 10){
         octave += 1;
     }
 })
