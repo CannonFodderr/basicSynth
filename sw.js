@@ -3,8 +3,9 @@ let urlsToCache = [
     '/',
     '/class.js',
 ]
-
+// Check if browser supports service workers
 if('serviceWorker' in navigator){
+    // Reegister service worker on window scope
     navigator.serviceWorker.register('sw.js')
     .then((reg)=>{
         console.log(`Service worker registered on ${reg.scope}`);
@@ -12,7 +13,7 @@ if('serviceWorker' in navigator){
         console.error(err);
     })
 }
-
+// add urls to cache
 self.addEventListener('install', (e)=>{
     e.waitUntil(
         caches.open(cacheName)

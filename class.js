@@ -14,11 +14,18 @@ let filterFreqSelector = document.querySelector('#filterFreq');
 // Tuning Elements
 let octaveUp = document.getElementById('octaveUp');
 let octaveDown = document.getElementById('octaveDown');
+let detuneInput = document.getElementById('detune');
+let detune = Number(detuneInput.value);
 
 let isRunning = false;
 let voiceArr = [];
 let octave = 4;
 let audioContext;
+
+// Detune listener
+detuneInput.addEventListener('change', ()=>{
+    detune = Number(detuneInput.value);
+})
 
 // Generate Note
 noteGenerator = (pressedKey) => {
@@ -92,43 +99,44 @@ window.addEventListener('keypress', (event)=>{
     }
     isRunning = true;
     if(event.keyCode === 97){
-        noteGenerator(16.35 * octave);
+        noteGenerator(16.35 * octave + detune);
     }
     if(event.keyCode === 119){
-        noteGenerator(17.32 * octave);
+        noteGenerator(17.32 * octave + detune);
     }
     if(event.keyCode === 115){
-        noteGenerator(18.35 * octave);
+        console.log(detune);
+        noteGenerator(18.35 * octave + detune);
     }
     if(event.keyCode === 116){
-        noteGenerator(23.12 * octave);
+        noteGenerator(23.12 * octave + detune);
     }
     if(event.keyCode === 117){
-        noteGenerator(29.14 * octave);
+        noteGenerator(29.14 * octave + detune);
     }
     if(event.keyCode === 121){
-        noteGenerator(25.96 * octave);
+        noteGenerator(25.96 * octave + detune);
     }
     if(event.keyCode === 100){
-        noteGenerator(20.60 * octave);
+        noteGenerator(20.60 * octave + detune);
     }
     if(event.keyCode === 101){
-        noteGenerator(19.45 * octave);
+        noteGenerator(19.45 * octave + detune);
     }
     if(event.keyCode === 102){
-        noteGenerator(21.83 * octave);
+        noteGenerator(21.83 * octave + detune);
     }
     if(event.keyCode === 103){
-        noteGenerator(24.50 * octave);
+        noteGenerator(24.50 * octave + detune);
     }
     if(event.keyCode === 104){
-        noteGenerator(27.50 * octave);
+        noteGenerator(27.50 * octave + detune);
     }
     if(event.keyCode === 106){
-        noteGenerator(30.87 * octave);
+        noteGenerator(30.87 * octave + detune);
     }
     if(event.keyCode === 107){
-        noteGenerator(32.70 * octave);
+        noteGenerator(32.70 * octave + detune);
     }
 });
 
