@@ -105,7 +105,6 @@ window.addEventListener('keypress', (event)=>{
         noteGenerator(17.32 * octave + detune);
     }
     if(event.keyCode === 115){
-        console.log(detune);
         noteGenerator(18.35 * octave + detune);
     }
     if(event.keyCode === 116){
