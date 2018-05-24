@@ -18,7 +18,6 @@ for (const wave of waveforms){
 
 function dragStart(e){
     draggedItem = this;
-    console.log(draggedItem);
 }
 function dragEnd(){
     
@@ -94,6 +93,5 @@ function filterDragDrop(e){
         this.className = "filter";
         this.src = draggedItem.src;
         this.alt = draggedItem.alt;
-        console.log(this.alt);
     }
 }
