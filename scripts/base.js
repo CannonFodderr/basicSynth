@@ -2,6 +2,8 @@ const waveforms = document.querySelectorAll('.wForm');
 const filters = document.querySelectorAll('.filter');
 const selectedForm = document.querySelector('#selectedForm');
 const selectedFilter = document.querySelector('#selectedFilter');
+
+
 let draggedItem = {};
 let draggedfilter = {};
 
@@ -54,6 +56,8 @@ function dragDrop(e){
 // ====================
 // FILTER SELECTION
 // ==================== 
+
+
 
 for (const f of filters){
     f.addEventListener('dragstart', filterDragStart);

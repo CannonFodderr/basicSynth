@@ -16,6 +16,7 @@ let octaveUp = document.getElementById('octaveUp');
 let octaveDown = document.getElementById('octaveDown');
 let detuneInput = document.getElementById('detune');
 let detune = Number(detuneInput.value);
+const filterSwitch = document.getElementById('filterSwitch');
 
 let isRunning = false;
 let voiceArr = [];
@@ -32,8 +33,12 @@ noteGenerator = (pressedKey) => {
     // Functions
     noteRoute = (key) => {
         key.oscNode.connect(key.gainNode);
-        key.gainNode.connect(key.filterNode);
-        key.filterNode.connect(audioContext.destination);
+        if(filterSwitch.value == "on"){
+            key.gainNode.connect(key.filterNode);
+            key.filterNode.connect(audioContext.destination);
+        } else {
+            key.gainNode.connect(audioContext.destination)
+        }
         playNote(key);
     }
     playNote = (key) =>  {
@@ -151,3 +156,14 @@ octaveDown.addEventListener('click', ()=> {
         octave -= 1;
     }
 })
+
+// Filter Switch
+filterSwitch.addEventListener('click', switchState);
+
+function switchState(){
+    if(filterSwitch.value == "on"){
+        filterSwitch.value = "off";
+    } else {
+        filterSwitch.value = "on";
+    }
+}
