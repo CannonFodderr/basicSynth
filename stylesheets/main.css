@@ -1,0 +1,57 @@
+:root{
+    --bg: #ccc;
+    --primary: steelblue;
+}
+body{
+    box-sizing: border-box;
+    background: var(--bg);
+    width: 100vw;
+}
+img {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.slot{
+    display: inline-block;
+    background: #fff;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.drag{
+    border: 3px dashed #232323;
+}
+
+.invisible{
+    display: none;
+}
+#genSlot{
+    position: relative;
+    left: 150px;
+    border-radius: 50%;
+}
+#filterSlot{
+    position: relative;
+    left: 100px;
+    border-radius: 50%;
+}
+#selectedForm{
+    background: var(--primary);
+    border-radius: 50%;
+}
+#selectedFilter{
+    background: var(--primary);
+    border-radius: 50%;
+}
+.waveFormGen{
+    width: max-content;
+    position: relative;
+    margin: 0 auto;
+}
+.filterSelector{
+    width: max-content;
+    position: relative;
+    margin: 0 auto;
+}

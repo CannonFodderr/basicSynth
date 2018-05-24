@@ -1,6 +1,6 @@
 // OSC Elements
 let gainSlider = document.querySelector('#gainSlider');
-let waveformSelector = document.querySelector('#waveform');
+let waveformSelector = document.querySelector('#selectedForm');
 let frequencySelector = document.querySelector('#frequency');
 // ADSR Envelope Elements
 let attackTime = document.querySelector('#attackTime');
@@ -9,7 +9,7 @@ let decayTime = document.querySelector('#decayTime');
 let sustainTime = document.querySelector('#sustainTime');
 let releaseTime = document.querySelector('#releaseTime');
 // Filter Elements
-let filterSelector = document.querySelector('#filterType');
+let filterSelector = document.querySelector('#selectedFilter');
 let filterFreqSelector = document.querySelector('#filterFreq');
 // Tuning Elements
 let octaveUp = document.getElementById('octaveUp');
@@ -64,7 +64,7 @@ class Note {
         this.filterNode = context.createBiquadFilter();
         this.buffer = context.createBuffer(1, context.sampleRate * 3, context.sampleRate);
         // OSC
-        this.oscNode.type = waveformSelector.value;
+        this.oscNode.type = waveformSelector.alt;
         this.oscNode.frequency.value = pressedKey;
         this.gainNode.gain.value = Number(gainSlider.value)
         // ADSR
@@ -74,7 +74,7 @@ class Note {
         this.sustainTime = Number(sustainTime.value);
         this.releaseTime = Number(releaseTime.value);
         // Filter
-        this.filterNode.type = filterType.value;
+        this.filterNode.type = filterSelector.alt;
         this.filterNode.frequency.value = Number(filterFreq.value);
     }
     
