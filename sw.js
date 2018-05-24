@@ -1,7 +1,8 @@
 let cacheName = "synthCach"
 let urlsToCache = [
     '/',
-    '/class.js',
+    'scripts/class.js',
+    'scripts/base.js',
 ]
 // Check if browser supports service workers
 if('serviceWorker' in navigator){
