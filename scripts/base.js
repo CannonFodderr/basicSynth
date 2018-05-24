@@ -48,7 +48,6 @@ function dragDrop(e){
     this.className = "wForm";
     this.src = draggedItem.src;
     this.alt = draggedItem.alt;
-    console.log(this.alt);
     }
 }
 
