@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="stylesheets/main.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
     <title>Synth</title>
 </head>
 <body>
+    <div class="container">
     <div class="controls">
-        <h5>Octave</h5>
-        <button id="octaveUp">Up</button>
-        <button id="octaveDown">Down</button>
+        <div id="octaves">
+            <h5>Octave</h5>
+            <button class="btn" id="octaveDown">Down</button>
+            <button class="btn" id="octaveUp">Up</button>
+        </div>
         <h5>Detune</h5>
         <label for="detune">Detune</label>
         <input type="range" name="detune" id="detune" min=-12 max=12 step=1 value=0>    
@@ -18,13 +24,30 @@
         <label for="gain">Gain</label>
         <input type="range" name="gainSlider" id="gainSlider" min=0.001 max=0.1 value=0.05 step=0.001>
         <br>
-        <label for="waveform">Waveform</label>
-        <select name="waveform" id="waveform">
-            <option value="sawtooth">Saw</option>
-            <option value="sine">Sine</option>
-            <option value="square">Square</option>
-            <option value="triangle">Triangle</option>
-        </select>
+        <!-- GUI CONTROLS -->
+    <div class="waveFormGen">
+        <h4>Choose Waveform</h4>
+        <p>Drag waveform to the blue box to change the sound</p>
+        <!-- Waveform options -->
+        <div class="slot">
+            <img src="images/sine.png" id="sine" class="wForm" draggable="true" alt="sine">   
+        </div>
+        <div class="slot">
+            <img src="images/saw.png" id="saw" class="wForm" draggable="true" alt="sawtooth">
+        </div>
+        <div class="slot">
+            <img src="images/square.png" id="square" class="wForm" draggable="true" alt="square">
+        </div>
+        <div class="slot">
+            <img src="images/triangle.png" id="triangle" class="wForm" draggable="true" alt="triangle">
+        </div>
+        <!-- Choosen waveform -->
+        <div class="generator">
+            <div id="genSlot" class="slot">
+                <img id="selectedForm" src="images/arrowdown.png" class="wForm" draggable="false" alt="sine">
+            </div>
+        </div>
+    </div>
         <hr>
         <!-- ADSR Envelopes -->
         <h5>ADSR Envlope</h5>
@@ -42,18 +65,34 @@
         <label for="Release Time">Release Time</label>
         <input type="range" name="releaseTime" id="releaseTime" value=1 min=0.1 max=5 step=0.1>
         <hr>
-        <h5>Filter</h5>
-        <label for="filterType">Type</label>
-        <select name="filterType" id="filterType">
-            <option value="lowpass">Lowpass</option>
-            <option value="bandpass">Bandpass</option>
-            <option value="highpass">Highpass</option>
-        </select>
-        <label for="filterFreq">Frequency</label>
-        <input type="range" id="filterFreq" name="filterFreq" min=20 max=20000 value=1000 step=1>
     </div>
-    <script src="class.js"></script>
+    <!-- Filter options -->
+    <div class="filterSelector">
+        <h4>Choose filter Type</h4>
+        <p>Drag filter to the blue box to change the type</p>
+        <div class="slot">
+            <img src="images/lowpass.jpg" id="lowpass" class="filter" draggable="true" alt="lowpass">   
+        </div>
+        <div class="slot">
+            <img src="images/bandpass.png" id="bandpass" class="filter" draggable="true" alt="bandpass">
+        </div>
+        <div class="slot">
+            <img src="images/hipass.jpg" id="hipass" class="filter" draggable="true" alt="highpass">
+        </div>
+        <div>
+            <div id="filterSlot" class="slot">
+                <img id="selectedFilter" src="images/arrowdown.png" class="filter" alt="lowpass" draggable="false">
+            </div>
+        </div>
+    </div>
+    <h5>Filter Frequency</h5>
+    <label for="filterFreq">Frequency</label>
+    <input type="range" id="filterFreq" name="filterFreq" min=20 max=20000 value=1000 step=1>
+    
+    <script src="scripts/base.js"></script>
+    <script src="scripts/class.js"></script>
     <script src="sw.js"></script>
-    <!-- <script src="synth.js"></script> -->
+<!-- End Container -->
+</div>
 </body>
 </html>
