@@ -1,5 +1,7 @@
 // OSC Elements
 let gainSlider = document.querySelector('#gainSlider');
+let currentGain = document.getElementById('currentGain');
+let currentOctave = document.getElementById('currentOctave');
 let waveformSelector = document.querySelector('#selectedForm');
 let frequencySelector = document.querySelector('#frequency');
 // ADSR Envelope Elements
@@ -16,6 +18,7 @@ let octaveUp = document.getElementById('octaveUp');
 let octaveDown = document.getElementById('octaveDown');
 let detuneInput = document.getElementById('detune');
 let detune = Number(detuneInput.value);
+let currentDetune = document.getElementById('currentDetune');
 const filterSwitch = document.getElementById('filterSwitch');
 
 let isRunning = false;
@@ -26,6 +29,7 @@ let audioContext;
 // Detune listener
 detuneInput.addEventListener('change', ()=>{
     detune = Number(detuneInput.value);
+    currentDetune.innerHTML = detune;
 })
 
 // Generate Note
@@ -150,11 +154,13 @@ octaveUp.addEventListener('click', ()=> {
     if(octave < 10){
         octave += 1;
     }
+    currentOctave.innerHTML = octave;
 })
 octaveDown.addEventListener('click', ()=> {
     if(octave > 1){
         octave -= 1;
     }
+    currentOctave.innerHTML = octave;
 })
 
 // Filter Switch
@@ -167,3 +173,9 @@ function switchState(){
         filterSwitch.value = "on";
     }
 }
+
+// Gain Slider
+getGainValue = () => {
+    currentGain.innerHTML = Number(gainSlider.value) * 1000;
+}
+gainSlider.addEventListener('change', getGainValue);
