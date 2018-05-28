@@ -1,11 +1,16 @@
 :root{
-    --bg: #fff;
+    --bg: #000;
+    --text: #fff;
     --primary: steelblue;
 }
 body{
     box-sizing: border-box;
     background: var(--bg);
+    background-image: url('/images/bg.jpg');
+    background-size: cover;
+    background-position: center;
     width: 100vw;
+    color: var(--text);
 }
 img {
     display: block;
